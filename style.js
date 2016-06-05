@@ -1,20 +1,2 @@
-webpackJsonp([1,3],{
-
-/***/ 0:
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(35);
-	module.exports = __webpack_require__(39);
-
-
-/***/ },
-
-/***/ 39:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ }
-
-});
+webpackJsonp([1,3],{0:function(n,o,c){c(35),n.exports=c(39)},39:function(n,o){}});
 //# sourceMappingURL=style.js.map
