@@ -9,7 +9,8 @@ const PATHS = {
 	app: path.join(__dirname, 'app'),
 	style: [
 		path.join(__dirname, 'node_modules', 'purecss'),
-		path.join(__dirname, 'app', 'main.css')
+		path.join(__dirname, 'app', 'main.css'),
+		path.join(__dirname, 'app', 'other.scss'),
 	],
 	build: path.join(__dirname, 'build')
 };
@@ -31,10 +32,12 @@ const common = {
 		vendor: ['react']*/
 
 	},
+
 	output: {
 		path: PATHS.build,
 		filename: '[name].js'
 	},
+
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Webpack demo'
@@ -53,7 +56,6 @@ switch(process.env.npm_lifecycle_event) {
 		//config = merge(common, {});
 		config = merge(
 
-			
 			{
 				devtool: 'source-map',
 				output: {
@@ -65,6 +67,7 @@ switch(process.env.npm_lifecycle_event) {
 					chunkFilename: '[chunkhash].js'
 				}
 			},
+			
 			parts.clean(PATHS.build),
 
 			parts.setFreeVariable(
@@ -75,20 +78,21 @@ switch(process.env.npm_lifecycle_event) {
 			parts.extractBundle({
 				name: 'vendor',
 				entries: [
-					'react', 
-					'purecss', 
+					'react'//, 
+					//'purecss'
 					//'webpack'
 				]
 			}),
-			common,
 			
+			common,
 
 			parts.minify(),
 
-			
-			parts.extractCSS(PATHS.style),
-			parts.purifyCSS([PATHS.app])
+			parts.setupCSS(PATHS.style),
 
+			parts.extractCSS(PATHS.style),
+
+			parts.purifyCSS([PATHS.style])
 
 		);
 		break;
