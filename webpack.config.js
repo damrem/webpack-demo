@@ -12,6 +12,7 @@ const PATHS = {
 		path.join(__dirname, 'app', 'main.css'),
 		path.join(__dirname, 'app', 'other.scss'),
 	],
+	//images: path.join(__dirname, 'app/images'),
 	build: path.join(__dirname, 'build')
 };
 
@@ -42,11 +43,35 @@ const common = {
 		new HtmlWebpackPlugin({
 			title: 'Webpack demo'
 		})
-	]
+	],
+
+				resolve: {
+		      		extensions: ['', '.js', '.jsx']
+		    	},
+
+		    	module:{
+					loaders:[
+						{
+							test: /\.jsx?$/,
+					  //loaders: ['babel?cacheDirectory']//,
+					  		loader:'babel',
+				        	query: {
+				        		cacheDirectory:true,
+				          		presets: ['es2015','react']
+				        	},
+					  		include: PATHS.app,
+					  		exclude: /node_modules/
+						}
+				  	]
+				}
+    
 };
 
 
 var config;
+
+//process.env.BABEL_ENV = TARGET;
+
 
 // Detect how npm is run and branch based on that
 switch(process.env.npm_lifecycle_event) {
@@ -67,6 +92,8 @@ switch(process.env.npm_lifecycle_event) {
 					chunkFilename: '[chunkhash].js'
 				}
 			},
+
+			
 			
 			parts.clean(PATHS.build),
 
@@ -86,9 +113,17 @@ switch(process.env.npm_lifecycle_event) {
 			
 			common,
 
+			//parts.translateJSX(PATHS.app),
+
 			parts.minify(),
 
 			parts.setupCSS(PATHS.style),
+
+			{
+				test: /\.(jpg|png)$/,
+				loader: 'url?limit=25000',
+				include: PATHS.app
+			},
 
 			parts.extractCSS(PATHS.style),
 
