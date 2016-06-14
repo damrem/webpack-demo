@@ -20,18 +20,18 @@ module.exports = React.createClass({
 				
 				<NameInput 
 				nameValue={this.state.nameValue} 
-				onSubmit={this.onSubmit}
+				submitCallback={this.submitCallback}
 				/>
 
 				<NameInput 
 				nameValue={this.state.nameValue} 
-				onSubmit={this.onSubmit}
+				submitCallback={this.submitCallback}
 				/>
 			</div>
 		);
 	},
 
-	onSubmit(subState){
+	submitCallback(subState){
 		this.setState(subState);
 	}
 });

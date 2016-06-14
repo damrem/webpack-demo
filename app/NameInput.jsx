@@ -12,12 +12,12 @@ module.exports = React.createClass({
 		return (
 			
 			<form
-			onSubmit={this.handleSubmit}
+			onSubmit={this.submitCallback}
 			>
 				<input 
 				type="text" 
 				value={this.state.nameValue}
-				onChange={this.handleChange}
+				onChange={this.changeCallback}
 				/>
 				
 				<input 
@@ -28,15 +28,15 @@ module.exports = React.createClass({
 		);
 	},
 
-	handleChange: function(evt){
+	changeCallback: function(evt){
 		console.log(evt.target.value);
 		this.setState({
 			nameValue: evt.target.value
 		});
 	},
 
-	handleSubmit: function(evt){
+	submitCallback: function(evt){
 		evt.preventDefault();
-		this.props.onSubmit(this.state);
+		this.props.submitCallback(this.state);
 	}
 })
