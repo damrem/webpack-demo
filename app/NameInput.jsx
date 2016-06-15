@@ -1,13 +1,17 @@
 import React from 'react';
 
-module.exports = React.createClass({
+export default
+class NameInput extends React.Component{
 	
-	
-	getInitialState: function(){
-		return {nameValue: this.props.nameValue};
-	},
+	constructor(props){
+		super(props);
+		this.state = {nameValue: this.props.nameValue};
 
-	render: function(){
+		this.changeCallback = this.changeCallback.bind(this);
+		this.submitCallback = this.submitCallback.bind(this);
+	}
+
+	render(){
 		console.log('render');
 		return (
 			
@@ -26,17 +30,18 @@ module.exports = React.createClass({
 
 			</form>
 		);
-	},
+	}
 
-	changeCallback: function(evt){
+	changeCallback(evt){
 		console.log(evt.target.value);
+		console.log(this.setState);
 		this.setState({
 			nameValue: evt.target.value
 		});
-	},
+	}
 
-	submitCallback: function(evt){
+	submitCallback(evt){
 		evt.preventDefault();
 		this.props.submitCallback(this.state);
 	}
-})
+}

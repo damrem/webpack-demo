@@ -1,10 +1,22 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import {Router,Route,IndexRoute,Link,hashHistory} from 'react-router';
+
+import Layout from './Layout';
+import Home from './Home';
 import App from './App';
 
-ReactDom.render(
+ReactDOM.render(
+	(
 
-	<App/>, 
+		<Router history={hashHistory}>
+			<Route path="/" component={Layout}>
+				<IndexRoute component={Home}/>
+				<Route path="app" component={App}/>
+			</Route>
+		</Router>
+	),
+
 	
 	document.body.appendChild(
 		document.createElement('div')

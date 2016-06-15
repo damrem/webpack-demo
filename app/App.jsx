@@ -2,13 +2,14 @@ import React from 'react';
 import HelloWorld from './HelloWorld';
 import NameInput from './NameInput';
 
-module.exports = React.createClass({
+export default
+class App extends React.Component{
 
-	getInitialState() {
-	    return {
-	        nameValue: 'init'  
-	    };
-	},
+	constructor(props) {
+		super(props);
+		this.state = {nameValue: 'init'};
+		this.submitCallback = this.submitCallback.bind(this);
+	};
 
 	render(){
 		return (
@@ -29,9 +30,9 @@ module.exports = React.createClass({
 				/>
 			</div>
 		);
-	},
+	};
 
 	submitCallback(subState){
 		this.setState(subState);
-	}
-});
+	};
+}

@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-module.exports = React.createClass({
+export default 
+class HelloWorld extends React.Component{
 	render(){
 		return (
 			<div>
@@ -10,5 +11,5 @@ module.exports = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
