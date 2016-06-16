@@ -6,12 +6,16 @@ const validate = require('webpack-validator');
 
 
 const PATHS = {
-	app: path.join(__dirname, 'app'),
-	style: [
+	app: [
+		path.join(__dirname, 'app'),
+		path.join(__dirname, 'node_modules', 'normalize.css')
+	],
+	/*style: [
 		path.join(__dirname, 'node_modules', 'purecss'),
 		path.join(__dirname, 'app', 'main.css'),
 		path.join(__dirname, 'app', 'other.scss'),
-	],
+		path.join(__dirname, 'app', 'NavBar.scss')
+	],*/
 	//images: path.join(__dirname, 'app/images'),
 	build: path.join(__dirname, 'build')
 };
@@ -27,8 +31,8 @@ const common = {
 	// We'll be using the latter form given it's
 	// convenient with more complex configurations.
 	entry: {
-		app: PATHS.app,
-		style: PATHS.style
+		app: PATHS.app/*,
+		style: PATHS.style*/
 		/*,
 		vendor: ['react']*/
 
@@ -105,7 +109,8 @@ switch(process.env.npm_lifecycle_event) {
 			parts.extractBundle({
 				name: 'vendor',
 				entries: [
-					'react'//, 
+					'react',
+					'normalize.css'//, 
 					//'purecss'
 					//'webpack'
 				]
@@ -117,7 +122,7 @@ switch(process.env.npm_lifecycle_event) {
 
 			parts.minify(),
 
-			parts.setupCSS(PATHS.style),
+			parts.setupCSS(PATHS.app),
 
 			{
 				test: /\.(jpg|png)$/,
@@ -125,9 +130,9 @@ switch(process.env.npm_lifecycle_event) {
 				include: PATHS.app
 			},
 
-			parts.extractCSS(PATHS.style),
+			parts.extractCSS(PATHS.app),
 
-			parts.purifyCSS([PATHS.style])
+			parts.purifyCSS([PATHS.app])
 
 		);
 		break;
@@ -138,7 +143,7 @@ switch(process.env.npm_lifecycle_event) {
 				devtool: 'eval-source-map'
 			},
 			//parts.setupCSS(PATHS.app),
-			parts.setupCSS(PATHS.style),
+			parts.setupCSS(PATHS.app),
 			parts.devServer({
 				// Customize host/port here if needed
 				host: process.env.HOST,

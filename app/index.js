@@ -6,6 +6,11 @@ import Layout from './Layout';
 import Home from './Home';
 import App from './App';
 
+require('normalize.css');
+require('./reset.scss');
+require('./main.css');
+
+
 ReactDOM.render(
 	(
 

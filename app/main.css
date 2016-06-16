@@ -1,4 +1,20 @@
 body {
-  background: lime;
-  font-size: 2em;
+	background: black;
+	color:white;
+	font-size: 2em;
+}
+
+input[type="text"]{
+	background:black;
+	border:1px solid white;
+	color:white;
+}
+
+input[type="submit"]{
+	color:red;
+}
+
+NavBar{
+	font-size:1em;
+	background:red;
 }

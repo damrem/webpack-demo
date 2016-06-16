@@ -1,0 +1,9 @@
+ul#NavBar{
+	list-style: none;
+	li{
+		float:left;
+	}
+	& + div{
+		clear:both;
+	}
+}
