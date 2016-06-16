@@ -6,8 +6,9 @@ export default class NavBar extends Component{
 	render(){
 		return(
 			<ul id="NavBar">
+				<li><Link to="/home">Home</Link></li>
 	        	<li><Link to="/app">App</Link></li>
-	        	<li><Link to="/inbox">Inbox</Link></li>
+	        	<li><Link to="/themes">Themes</Link></li>
 	        </ul>
 		);
 	}
