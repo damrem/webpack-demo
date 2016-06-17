@@ -5,11 +5,11 @@ import {Router,Route,IndexRoute,Link,hashHistory} from 'react-router';
 import Layout from './Layout';
 import Home from './Home';
 import App from './App';
-import ThemeListRoute from './ThemeList';
+import ThemeState from './ThemeState';
 
 require('normalize.css');
 require('./reset.scss');
-require('./main.css');
+require('./main.scss');
 
 
 ReactDOM.render(
@@ -19,7 +19,7 @@ ReactDOM.render(
 			<Route path="/" component={Layout}>
 				<IndexRoute component={Home}/>
 				<Route path="app" component={App}/>
-				<Route path="themes" component={ThemeListRoute}/>
+				<Route path="themes" component={ThemeState}/>
 			</Route>
 		</Router>
 	),

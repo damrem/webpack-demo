@@ -1,7 +1,9 @@
 import React from 'react';
+import Route from 'react-router';
+import _ from 'lodash';
 
 export default
-class ThemeListRoute extends React.Component{
+class ThemeState extends React.Component{
 	
 	constructor(){
 		super();
@@ -10,7 +12,8 @@ class ThemeListRoute extends React.Component{
 		};
 	}
 
-	render(){
+    // <Route path="list" component={ThemeList}
+  render(){
 		return <ThemeList themes={this.state.themes}/>;
 	}
 
@@ -60,17 +63,28 @@ class ThemeList extends React.Component{
 		
 		return (
 			<ul>
-				{this.props.themes.map((theme, i) => <ThemeItem key={i} theme={theme}/>)}
+				{ this.props.themes.map((theme, i) => 
+          <li key={i}>
+            <ThemeItem theme={theme}/>
+          </li>) }
 			</ul>
 		);
 	}
 }
 
 export
+class RandomTheme extends React.Component{
+
+  render(){
+    return <ThemeItem theme={_.sample(this.props.themes)}/>;
+  }
+}
+
+export
 class ThemeItem extends React.Component{
 	render(){
 		return (
-			<li>{this.props.theme.label}</li>
+			<div>{this.props.theme.label}</div>
 		);
 	}
 }
