@@ -1,6 +1,7 @@
 import React from 'react';
 import Route from 'react-router';
 import _ from 'lodash';
+import {ThemeManager, Theme} from './ThemeManager';
 
 export default
 class ThemeState extends React.Component{
@@ -12,47 +13,27 @@ class ThemeState extends React.Component{
 		};
 	}
 
-    // <Route path="list" component={ThemeList}
-  render(){
+	// <Route path="list" component={ThemeList}
+	render(){
+		console.log('render');
 		return <ThemeList themes={this.state.themes}/>;
 	}
 
-	parseText(text) {
-    	var rxp = /^[0-9]{1,2}\.\t([^\t]{3,})\t([\+\-0]\d*)\t(\d+)\t(\d+)\t(\d+)$/gmi;
-    	var themes = [];
-    	var match;
-    	while (!!(match = rxp.exec(text))) {
-      		themes.push({
-        		label: match[1],
-        		//delta: parseInt(match[2]),
-        		pros: parseInt(match[3]),
-        		cons: parseInt(match[5]),
-        		neutral: parseInt(match[4])
-    		});
-    	};
-    	return themes;
+	
+
+  
+	componentDidMount() {
+		console.log('componentDidMount');
+	
+		var that = this;
+
+
+		ThemeManager.getList()
+		.then(themeList => that.setState({
+			themes: themeList
+		}));
+		
 	}
-  
-  	fetchData() {
-	    return fetch('https://gist.githubusercontent.com/damrem/840a2329bf6d699de4ba662b4055c83a/raw/fedf377c6879ab3d1cd618be6077bf26994835e8/ld-voting-results.md')
-    	.then(response => response.text());
-  	}
-
-  
-  	componentDidMount() {
-    
-    	var that = this;
-
-    	this.fetchData()
-      	.then(
-        	function(text) {
-          		//if (!that.isMounted()) return;
-          		that.setState({
-            		themes: that.parseText(text)
-          		});
-        	}
-      	);
-  	}
 }
 
 export
@@ -64,9 +45,10 @@ class ThemeList extends React.Component{
 		return (
 			<ul>
 				{ this.props.themes.map((theme, i) => 
-          <li key={i}>
-            <ThemeItem theme={theme}/>
-          </li>) }
+					<li key={i}>
+						<ThemeItem theme={theme}/>
+					</li>) 
+				}
 			</ul>
 		);
 	}
@@ -75,16 +57,29 @@ class ThemeList extends React.Component{
 export
 class RandomTheme extends React.Component{
 
-  render(){
-    return <ThemeItem theme={_.sample(this.props.themes)}/>;
-  }
+	render(){
+		return <ThemeItem theme={_.sample(this.props.themes)}/>;
+	}
 }
 
 export
 class ThemeItem extends React.Component{
 	render(){
 		return (
-			<div>{this.props.theme.label}</div>
+			<div class="Theme">
+				<span>{this.props.theme.label}</span>
+				<div>
+					<div 
+					style={ this.props.theme.getGaugeStyle('pros') }
+					>&nbsp;</div>
+					<div 
+					style={ this.props.theme.getGaugeStyle('neutral') }
+					>&nbsp;</div>
+					<div 
+					style={ this.props.theme.getGaugeStyle('cons') }
+					>&nbsp;</div>
+				</div>
+			</div>
 		);
 	}
 }

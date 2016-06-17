@@ -108,12 +108,11 @@ switch(process.env.npm_lifecycle_event) {
 
 			parts.extractBundle({
 				name: 'vendor',
-				entries: [
+				/*entries: [
 					'react',
-					'normalize.css'//, 
-					//'purecss'
-					//'webpack'
-				]
+					'normalize.css'
+				]*/
+				entries: Object.keys(require('./package.json').dependencies)
 			}),
 			
 			common,
