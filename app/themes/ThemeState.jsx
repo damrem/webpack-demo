@@ -2,9 +2,31 @@ import React from 'react';
 import Route from 'react-router';
 import _ from 'lodash';
 import {ThemeManager, Theme} from './ThemeManager';
+import Clear from '../Clear';
 
-export default
-class ThemeState extends React.Component{
+require("./themes.scss");
+
+export
+const THEME_ROUTES = {
+	path:'themes',
+
+	/*getChildRoutes(partialNextState, callback){
+		require.ensure([], require=>
+			callback(null, [
+				RandomTheme
+			])
+		)
+	},*/
+
+	getComponent(nextState, callback){
+		require.ensure([], require=>
+			callback(null, ThemeRoot)
+		)
+	}
+};
+
+export
+class ThemeRoot extends React.Component{
 	
 	constructor(){
 		super();
@@ -13,37 +35,31 @@ class ThemeState extends React.Component{
 		};
 	}
 
-	// <Route path="list" component={ThemeList}
 	render(){
-		console.log('render');
-		return <ThemeList themes={this.state.themes}/>;
+		return (
+			//<div>
+			// <ThemeList themes={this.state.themes}/>
+			<RandomTheme themes={this.state.themes}/>
+			//</div>
+		);
 	}
-
-	
-
   
 	componentDidMount() {
 		console.log('componentDidMount');
-	
-		var that = this;
-
-
 		ThemeManager.getList()
-		.then(themeList => that.setState({
-			themes: themeList
-		}));
-		
+		.then(
+			(themeList => this.setState({themes: themeList})).bind(this)
+		);
 	}
-}
+};
 
 export
 class ThemeList extends React.Component{
 
 	render(){
-		console.log(this.props.themes);
-		
-		return (
-			<ul>
+		return 
+			(<ul className="ThemeList noBullet">
+				<li>list</li>
 				{ this.props.themes.map((theme, i) => 
 					<li key={i}>
 						<ThemeItem theme={theme}/>
@@ -58,7 +74,10 @@ export
 class RandomTheme extends React.Component{
 
 	render(){
-		return <ThemeItem theme={_.sample(this.props.themes)}/>;
+		console.log(this.props.themes);
+		return (!!this.props.themes && !!this.props.themes.length) 
+		? <ThemeItem className="ThemeItem" theme={_.sample(this.props.themes)}/> 
+		: <div/>;
 	}
 }
 
@@ -66,7 +85,7 @@ export
 class ThemeItem extends React.Component{
 	render(){
 		return (
-			<div class="Theme">
+			<div className="ThemeItem">
 				<span>{this.props.theme.label}</span>
 				<div>
 					<div 
@@ -79,6 +98,7 @@ class ThemeItem extends React.Component{
 					style={ this.props.theme.getGaugeStyle('cons') }
 					>&nbsp;</div>
 				</div>
+				<Clear/>
 			</div>
 		);
 	}
