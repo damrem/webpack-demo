@@ -13,17 +13,12 @@ require('./reset.scss');
 require('./main.scss');
 
 const ROOT_ROUTES = {
-
-	component:'div',
+	path:'/',
+	component:Layout,
 	childRoutes:[
 		{
-			path:'/',
-			component: Layout,
+			indexRoute: {component: Home},
 			childRoutes:[
-				{
-					path:'/',
-					component: Home
-				},
 				{
 					path:'/app',
 					component: App
@@ -32,29 +27,17 @@ const ROOT_ROUTES = {
 			]
 		}
 	]
-
 };
 
 
 ReactDOM.render(
-	/*(
-
-		<Router history={hashHistory}>
-			<Route path="/" component={Layout}>
-				<IndexRoute component={Home}/>
-				<Route path="app" component={App}/>
-				<Route path="themes" component={ThemeState}/>
-			</Route>
-		</Router>
-	),*/
-
+	
 	(
 		<Router
 		history={hashHistory}
 		routes={ROOT_ROUTES}
 		/>
 	),
-
 	
 	document.body.appendChild(
 		document.createElement('div')

@@ -10,13 +10,14 @@ export
 const THEME_ROUTES = {
 	path:'themes',
 
-	/*getChildRoutes(partialNextState, callback){
+	getChildRoutes(partialNextState, callback){
 		require.ensure([], require=>
 			callback(null, [
+				ThemeList,
 				RandomTheme
 			])
 		)
-	},*/
+	},
 
 	getComponent(nextState, callback){
 		require.ensure([], require=>
