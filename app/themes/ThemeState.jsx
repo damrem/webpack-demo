@@ -9,7 +9,7 @@ require("./themes.scss");
 export
 const THEME_ROUTES = {
 	path:'themes',
-
+	title:'Themes',
 	getChildRoutes(partialNextState, callback){
 		require.ensure([], require=>
 			callback(null, [
