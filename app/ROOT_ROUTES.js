@@ -2,7 +2,7 @@
 import Layout from './Layout';
 import Home from './Home';
 import App from './App';
-import {THEME_ROUTES} from './themes/ThemeState';
+import themeRoutes from './themes/routes';
 
 export default {
 	path:'/',
@@ -19,7 +19,7 @@ export default {
 					title:'App',
 					component: App
 				},
-				THEME_ROUTES
+				themeRoutes
 			]
 		}
 	]
