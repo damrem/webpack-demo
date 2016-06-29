@@ -4,7 +4,7 @@ import {ThemeManager} from './ThemeManager';
 
 require("./themes.scss");
 
-export
+export default
 class ThemeItem extends React.Component{
 	render(){
 		return (

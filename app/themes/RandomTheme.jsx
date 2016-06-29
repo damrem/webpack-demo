@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeItem} from './ThemeState';
+import ThemeItem from './ThemeItem';
 import {ThemeManager} from './ThemeManager';
 
 export
