@@ -16,10 +16,16 @@ class ThemeLayout extends React.Component{
 	}
 
 	render(){
+		console.log('render', this.props);
 		return (
 			<div>
 				<NavBar routes={routes}/>
 				<div>{this.props.children}</div>
+				<div>{
+					React.cloneElement(this.props.children, {
+						themes: this.state.themes 
+					})
+				}</div>
 			</div>
 		);
 	}

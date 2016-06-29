@@ -6,19 +6,15 @@ export default {
 	path:'themes',
 	title:'Themes',
 	component:ThemeLayout,
+	indexRoute: {
+		component: RandomTheme,
+		title: 'RandomTheme'
+	},
 	childRoutes:[
 		{
-			indexRoute: {
-				component: RandomTheme,
-				title: 'RandomTheme'
-			},
-			childRoutes:[
-				{
-					path:'list',
-					title:'ThemeList',
-					component: ThemeList
-				}
-			]
+			path:'list',
+			title:'ThemeList',
+			component: ThemeList
 		}
 	]
 };

@@ -15,14 +15,22 @@ export default class NavBar extends Component{
 
 			<ul id="NavBar">
 
-				<li><Link to={basePath==='/'?basePath:'/'+basePath}>{routes.indexRoute.title}</Link></li>
+				{(!!this.props.routes ? <li>
+					<Link 
+					to={ basePath==='/' ? basePath : '/'+basePath }
+					>
+						{ this.props.routes.indexRoute.title }
+					</Link>
+				</li>:<li/>)}
+
 				{
-					routes.childRoutes.map(
+					!!this.props.routes.childRoutes && this.props.routes.childRoutes.map(
 						(childRoute, i)=>
 						<li key={i}>
 							<Link 
-							to={(basePath!=='/'?'/'+basePath+'/':basePath)+childRoute.path}>
-								{childRoute.title||childRoute.path}
+							to={ ( basePath!=='/' ? '/'+basePath+'/' : basePath ) + childRoute.path }
+							>
+								{ childRoute.title||childRoute.path }
 							</Link>
 						</li>
 					)
