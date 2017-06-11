@@ -49,26 +49,26 @@ const common = {
 		})
 	],
 
-				resolve: {
-		      		extensions: ['', '.js', '.jsx']
-		    	},
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 
-		    	module:{
-					loaders:[
-						{
-							test: /\.jsx?$/,
-					  //loaders: ['babel?cacheDirectory']//,
-					  		loader:'babel',
-				        	query: {
-				        		cacheDirectory:true,
-				          		presets: ['es2015','react']
-				        	},
-					  		include: PATHS.app,
-					  		exclude: /node_modules/
-						}
-				  	]
-				}
-    
+	module:{
+		rules:[
+			{
+				test: /\.jsx?$/,
+		  //loaders: ['babel?cacheDirectory']//,
+				use:['babel-loader'],
+				query: {
+					cacheDirectory:true,
+					presets: ['es2015','react']
+				},
+				include: PATHS.app,
+				exclude: /node_modules/
+			}
+		]
+	}
+	
 };
 
 
@@ -125,7 +125,7 @@ switch(process.env.npm_lifecycle_event) {
 
 			{
 				test: /\.(jpg|png)$/,
-				loader: 'url?limit=25000',
+				use: ['url?limit=25000'],
 				include: PATHS.app
 			},
 
